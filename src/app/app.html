@@ -1,28 +1,90 @@
-<ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Esquel TQS</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-split-pane>
+  <ion-menu id="NoLoginDefault" side="left" [content]="content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Esquel TQS</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <ion-content>
-    <ion-list-header>
-      功能
-    </ion-list-header>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-    </ion-list>
-    <ion-list>
+    <ion-content>
+      <ion-list-header>
+        主模块
+      </ion-list-header>
+      <ion-list>
+        <button menuClose ion-item *ngFor="let np of pages" (click)="openPage(np)">
+          <ion-icon item-start [name]="np.icon"></ion-icon>
+          {{np.title}}
+        </button>
+      </ion-list>
       <ion-list-header>
         用户
       </ion-list-header>
-      <button ion-item menuClose>登陆</button>
-    </ion-list>
-  </ion-content>
+      <ion-list>
+        <button menuClose ion-item (click)="openLoginPage()">
+          <ion-icon item-start name="log-in"></ion-icon>
+          登陆</button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
 
-</ion-menu>
+  <ion-menu id="LoginDefault" side="left" [content]="content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Esquel TQS</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+    <ion-content>
+      <ion-list-header>
+        主模块
+      </ion-list-header>
+      <ion-list>
+        <button menuClose ion-item *ngFor="let lp of pages" (click)="openPage(lp)">
+          <ion-icon item-start [name]="lp.icon"></ion-icon>
+          {{lp.title}}
+        </button>
+      </ion-list>
+
+      <ion-list-header>
+        用户
+      </ion-list-header>
+      <ion-list>
+        <button menuClose ion-item>
+          <ion-icon item-start name="log-out"></ion-icon>
+          退出登陆</button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-menu id="OrderInputDefault" side="left" [content]="content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Esquel TQS</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-list-header>
+          样板检查模块
+        </ion-list-header>
+        <ion-list>
+          <button menuClose ion-item *ngFor="let p of subPages" (click)="openPage(p)">
+            <ion-icon item-start [name]="p.icon"></ion-icon>
+            {{p.title}}
+          </button>
+        </ion-list>
+
+        <ion-list-header>
+          返回操作
+        </ion-list-header>
+        <button menuClose ion-item (click)="backupMainModule()">
+          <ion-icon item-start name="ios-undo-outline"></ion-icon>
+          返回主菜单</button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false" main></ion-nav>
+</ion-split-pane>
