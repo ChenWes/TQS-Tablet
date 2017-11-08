@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the SearchOrderPage page.
@@ -15,14 +16,81 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SearchOrderPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  //search order model default value
+  searchOrderModel = {
+    cardCode: '',
+    orderCode: ''
+  };
+
+  //order list model
+  orders: Array<{
+    orderCode: string,
+    customerName: string,
+    sampleTypeDesc: string,
+    washingTypeDesc: string,
+    zaCode: string,
+    styleNo: string,
+    cheGroup: string,
+    statusDesc: string,
+    orderCount: number,
+    currentProcess: string
+  }>;
+
+  constructor(private view: ViewController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchOrderPage');
   }
 
-  orderback() {
-    this.navCtrl.pop();
+  ionViewWillLoad() {
+    // const data = this.navParams.get('name');
+    // console.log(data);
+  }
+
+  noSelectOrderClosePage() {
+    //send data
+    const data = {
+      orderCode: '',
+      customerName: '',
+      sampleTypeDesc: '',
+      washingTypeDesc: '',
+      zaCode: '',
+      styleNo: '',
+      cheGroup: '',
+      statusDesc: '',
+      orderCount: 0,
+      currentProcess: ''
+    };
+
+    //page back and send data
+    this.view.dismiss(data);
+  }
+
+  selectOrderClosePage(event, data) {
+    // console.log(data);
+    //page back and send data
+    this.view.dismiss(data);
+  }
+
+  searchOrderbyAPI(e) {
+
+    console.log(e);
+    // this.presentLoading();
+
+    this.orders = [];
+    for (let i = 1; i < 11; i++) {
+      this.orders.push({
+        orderCode: 'S17GS0500' + i,
+        customerName: 'PYE',
+        sampleTypeDesc: 'Sample',
+        washingTypeDesc: '不洗水',
+        zaCode: 'i-' + i,
+        styleNo: 'S16225LI60',
+        cheGroup: '组别01',
+        statusDesc: '待QA',
+        orderCount: i,
+        currentProcess: '洗水后'
+      });
+    }
   }
 }

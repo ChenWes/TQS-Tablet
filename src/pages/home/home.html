@@ -2,14 +2,26 @@
 
   <ion-navbar>
     <ion-title>主页</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openChangeLanguage()">
+        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  <p>
-    If you get lost, the
-    <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-card>
+    <ion-card-header>
+      个人首页
+    </ion-card-header>
+
+    <ion-card-content>
+      信息源 基于 TDC RFID 系统平台建立的 TDC 质量管理系统，分为现场平板电脑输入端和 PC 数据分析端两部分，根据制单在 RFID 系统刷卡状态，现场 QA 在指定的工序上进行质量检 查，并在平板电脑的质量检查系统进行检查信息输入，相关的资料将设置于
+      ETS 系统。
+    </ion-card-content>
+
+
+  </ion-card>
 </ion-content>

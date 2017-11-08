@@ -7,19 +7,55 @@
 <ion-header>
   <ion-navbar>
     <ion-title>样板查询</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="noSelectOrderClosePage()">取消</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-
-<!-- <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>不合格样板查询</ion-title>
-  </ion-navbar>
-</ion-header> -->
-
 <ion-content padding>
-  <button ion-button (click)='orderback()'>Get Order And Back</button>
+  <ion-grid>
+    <ion-row>
+      <ion-searchbar (ionInput)="searchOrderbyAPI($event)"></ion-searchbar>
+      <!-- <ion-col>
+        <ion-item>
+          <ion-label floating>卡号</ion-label>
+          <ion-input type="text" [(ngModel)]="searchOrderModel.cardCode"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label floating>制单号码</ion-label>
+          <ion-input type="text" [(ngModel)]="searchOrderModel.orderCode"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <button ion-button (click)="searchOrderbyAPI()">
+          确定</button>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
+  <ion-list *ngFor="let order of orders" (click)="selectOrderClosePage($event, order)">
+
+    <ion-card>
+      <ion-item>
+        <ion-icon item-start name='clipboard'></ion-icon>
+        <h2>{{order.orderCode}}</h2>
+        <p>{{order.zaCode}}</p>
+        <p>{{order.orderCount}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon item-start name='person'></ion-icon>
+        <h2>{{order.customerName}}</h2>
+      </ion-item>
+      <ion-item actions>
+        <span ion-text item-start class="item-bold">点击选择该单据</span>
+        <span ion-text item-start color="subtle">即选择单据进行操作</span>
+        <button ion-button clear item-end icon-start>
+          <ion-icon name='navigate'></ion-icon>
+          选择
+        </button>
+      </ion-item>
+    </ion-card>
+  </ion-list>
 </ion-content>

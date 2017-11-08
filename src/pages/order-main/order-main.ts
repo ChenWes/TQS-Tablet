@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ModalController, Modal } from 'ionic-angular';
 
 import { MenuController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
@@ -20,25 +21,63 @@ import { SearchOrderPage } from '../search-order/search-order';
 })
 export class OrderMainPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alerCtrl: AlertController, public menuCtrl: MenuController) {
+  currentOrder = {
+    orderCode: '',
+    customerName: '',
+    sampleTypeDesc: '',
+    washingTypeDesc: '',
+    zaCode: '',
+    styleNo: '',
+    cheGroup: '',
+    statusDesc: '',
+    orderCount: '',
+    currentProcess: ''
+  };
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alerCtrl: AlertController, public menuCtrl: MenuController, private modal: ModalController) {
   }
 
+  ionViewDidLoad() {
+  }
 
-  SearchPage() {
-
+  confirmOrder() {
+    //change menu
     this.menuCtrl.enable(false, 'NoLoginDefault');
     this.menuCtrl.enable(false, 'LoginDefault');
     this.menuCtrl.enable(true, 'OrderInputDefault');
+  }
 
-    // let alert = this.alerCtrl.create({
-    //   title: 'Can Not Found Data',
-    //   message: 'System Can Not Found Data ,Please Check Network And Try Again Or Contact System Administrator !',
-    //   buttons: ['Ok']
-    // });
-    // alert.present()
+
+  openReadCard() {
+
   }
 
   popSearchOrderPage() {
-    this.navCtrl.push(SearchOrderPage);
+    const myModelData = {
+      orderCode: '',
+      customerName: '',
+      sampleTypeDesc: '',
+      washingTypeDesc: '',
+      zaCode: '',
+      styleNo: '',
+      cheGroup: '',
+      statusDesc: '',
+      orderCount: 0,
+      currentProcess: ''
+    };
+
+    //show modal
+    const searchOrderModal: Modal = this.modal.create(SearchOrderPage, { name: myModelData }, { enableBackdropDismiss: false });
+    searchOrderModal.present();
+
+    //get parameter callback
+    searchOrderModal.onDidDismiss((data) => {
+      this.currentOrder = data;
+      // console.log(data);
+    });
+
+    // searchOrderModal.onWillDismiss((data) => {
+    //   console.log(data);
+    // });
   }
 }

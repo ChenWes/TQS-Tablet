@@ -1,0 +1,151 @@
+<!--
+  Generated template for the StyleCheckPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>对款检查输入</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openReadCard()">
+        <ion-icon name='ios-cloud-upload'></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label floating>QA评语</ion-label>
+          <ion-select [(ngModel)]='styleCheck.qa'>
+            <ion-option value="qa">结构完整，可以通过</ion-option>
+            <ion-option value="it">结构完整，可以通过</ion-option>
+            <ion-option value="manage">结构完整，可以通过</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col col-3>
+        <ion-item>
+          <ion-label floating>检查次数</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]='styleCheck.checkTime'></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-3>
+        <ion-item>
+          <ion-label floating>检查结果</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]='styleCheck.checkStatusDesc'></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-toolbar no-border-top>
+          <ion-segment [(ngModel)]="defaultSelectTab">
+            <ion-segment-button value="material">
+              物料检查
+            </ion-segment-button>
+            <ion-segment-button value="struct">
+              结构检查
+            </ion-segment-button>
+          </ion-segment>
+        </ion-toolbar>
+        <div [ngSwitch]="defaultSelectTab">
+          <ion-list *ngSwitchCase="'material'">
+            <ion-item>
+              <ion-label>主唛</ion-label>
+              <ion-toggle color='danger'></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>尺码唛</ion-label>
+              <ion-toggle color="danger"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>其他唛</ion-label>
+              <ion-toggle color="danger"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>贴纸</ion-label>
+              <ion-toggle color="danger"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>其他纸制品</ion-label>
+              <ion-toggle color="danger"></ion-toggle>
+            </ion-item>
+          </ion-list>
+
+          <ion-list *ngSwitchCase="'struct'">
+            <ion-item>
+              <ion-label>领</ion-label>
+              <ion-toggle color='danger'></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>筒/纽子</ion-label>
+              <ion-toggle color="danger"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>前中纽和纽门</ion-label>
+              <ion-toggle color="danger"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>担干</ion-label>
+              <ion-toggle color="danger"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>后幅</ion-label>
+              <ion-toggle color="danger"></ion-toggle>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-col>
+
+      <ion-col col-6>
+        <ion-list>
+          <ion-item>
+          </ion-item>
+          <ion-item>
+            <ion-label>部位</ion-label>
+            <ion-select>
+              <ion-option value="qa">QA</ion-option>
+              <ion-option value="it">IT</ion-option>
+              <ion-option value="manage">Manage</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>疵点名称</ion-label>
+            <ion-select>
+              <ion-option value="qa">QA</ion-option>
+              <ion-option value="it">IT</ion-option>
+              <ion-option value="manage">Manage</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>责任部门</ion-label>
+            <ion-select>
+              <ion-option value="qa">QA</ion-option>
+              <ion-option value="it">IT</ion-option>
+              <ion-option value="manage">Manage</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>错款件数</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

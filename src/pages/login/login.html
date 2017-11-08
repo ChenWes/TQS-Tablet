@@ -7,12 +7,30 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>login</ion-title>
+    <ion-title>用户登陆</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item>
+      <ion-label floating>工号</ion-label>
+      <ion-input type="text" [(ngModel)]="userData.code"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>密码</ion-label>
+      <ion-input type="password" [(ngModel)]="userData.password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <div id="topButtons">
+      <button ion-button item-letft (click)='loginFunction()'>
+        <ion-icon name='log-in'></ion-icon>
+        登陆</button>
+      <button ion-button color='light' (click)='signupFunction()'>
+        <ion-icon name='person-add'></ion-icon>
+        注册</button>
+    </div>
+  </div>
 </ion-content>

@@ -4,41 +4,39 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>样板检查输入</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openReadCard()">
+        <ion-icon name='card'></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>样板检查输入</h3>
-  <!-- <p>
-    If you get lost, the
-    <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p> -->
-  <!-- <button ion-button secondary menuToggle>主菜单</button> -->
-
   <ion-grid>
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label stacked>制单号码</ion-label>
-          <ion-input type="text" (click)="popSearchOrderPage()" ng-bind="selectedOrder"></ion-input>          
+          <ion-label floating>制单号码</ion-label>
+          <ion-input type="text" (click)="popSearchOrderPage()" [(ngModel)]="currentOrder.orderCode"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label stacked>客户</ion-label>
-          <ion-input type="text" value='TDC' readonly=true></ion-input>
+          <ion-label floating>客户</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]="currentOrder.customerName"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label stacked>Sample Type</ion-label>
-          <ion-input type="text" readonly=true></ion-input>
+          <ion-label floating>Sample Type</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]="currentOrder.sampleTypeDesc"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label stacked>Washing Type</ion-label>
-          <ion-input type="text" readonly=true></ion-input>
+          <ion-label floating>Washing Type</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]="currentOrder.washingTypeDesc"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -46,26 +44,26 @@
     <ion-row align-items-start>
       <ion-col>
         <ion-item>
-          <ion-label stacked>扎号</ion-label>
-          <ion-input type="text" readonly=true></ion-input>
+          <ion-label floating>扎号</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]="currentOrder.zaCode"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label stacked>款号</ion-label>
-          <ion-input type="text" readonly=true></ion-input>
+          <ion-label floating>款号</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]="currentOrder.styleNo"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label stacked>车缝组别</ion-label>
-          <ion-input type="text" readonly=true></ion-input>
+          <ion-label floating>车缝组别</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]="currentOrder.cheGroup"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label stacked>状态</ion-label>
-          <ion-input type="text" readonly=true></ion-input>
+          <ion-label floating>状态</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]="currentOrder.statusDesc"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -73,25 +71,22 @@
     <ion-row align-items-center>
       <ion-col>
         <ion-item>
-          <ion-label stacked>制单数量</ion-label>
-          <ion-input type="text" readonly=true></ion-input>
+          <ion-label floating>制单数量</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]="currentOrder.orderCount"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label stacked>当前工序</ion-label>
-          <ion-input type="text" readonly=true></ion-input>
+          <ion-label floating>当前工序</ion-label>
+          <ion-input type="text" readonly=true [(ngModel)]="currentOrder.currentProcess"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
-        <button ion-button (click)="SearchPage()">确定</button>
+        <button ion-button (click)="confirmOrder()">
+          确定</button>
       </ion-col>
       <ion-col>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <div *ngIf="selectedItem" padding>
-    查看SJO-<b>{{selectedOrder.code}}</b>
-  </div>
 </ion-content>

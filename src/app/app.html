@@ -2,20 +2,11 @@
   <ion-menu id="NoLoginDefault" side="left" [content]="content">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Esquel TQS</ion-title>
+        <ion-title>Esquel TQS Tablet</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
-      <ion-list-header>
-        主模块
-      </ion-list-header>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let np of pages" (click)="openPage(np)">
-          <ion-icon item-start [name]="np.icon"></ion-icon>
-          {{np.title}}
-        </button>
-      </ion-list>
       <ion-list-header>
         用户
       </ion-list-header>
@@ -30,7 +21,7 @@
   <ion-menu id="LoginDefault" side="left" [content]="content">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Esquel TQS</ion-title>
+        <ion-title>Esquel TQS Tablet</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -45,11 +36,17 @@
         </button>
       </ion-list>
 
-      <ion-list-header>
-        用户
+      <ion-list-header *ngIf="currentUserDetail">
+        当前用户 {{currentUserDetail.userName}}
       </ion-list-header>
       <ion-list>
-        <button menuClose ion-item>
+        <button *ngIf="currentUserDetail" menuClose ion-item (click)="openChangePasswordPage()">
+          <ion-icon item-start name="person"></ion-icon>
+          修改密码</button>
+        <button *ngIf="currentUserDetail" menuClose ion-item (click)="openUserAcountManagePage()">
+          <ion-icon item-start name="person"></ion-icon>
+          用户管理</button>
+        <button menuClose ion-item (click)="logout()">
           <ion-icon item-start name="log-out"></ion-icon>
           退出登陆</button>
       </ion-list>
@@ -59,7 +56,7 @@
   <ion-menu id="OrderInputDefault" side="left" [content]="content">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Esquel TQS</ion-title>
+        <ion-title>Esquel TQS Tablet</ion-title>
       </ion-toolbar>
     </ion-header>
 

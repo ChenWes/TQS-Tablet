@@ -11,6 +11,9 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { OrderMainPage } from '../pages/order-main/order-main';
 import { LoginPage } from '../pages/login/login';
+import { ChangePasswordPage } from '../pages/change-password/change-password';
+import { UserAcountManagePage } from '../pages/user-acount-manage/user-acount-manage';
+import { StyleCheckPage } from '../pages/style-check/style-check';
 
 
 export interface PageInterface {
@@ -29,14 +32,18 @@ export interface PageInterface {
 export class TQSApp {
   @ViewChild(Nav) nav: Nav;
 
+  //account data for display
+  currentUserDetail: any;
+
   rootPage: any = HomePage;
 
   pages: PageInterface[] = [
     { title: '样板检查输入', component: OrderMainPage, icon: 'ios-paper-outline' },
     { title: '不合格样板查询', component: ListPage, icon: 'ios-book-outline' }
   ];// Array<{ title: string, component: any, icon: string }>;
+
   subPages: PageInterface[] = [
-    { title: '对款检查输入', component: ListPage, icon: 'list' },
+    { title: '对款检查输入', component: StyleCheckPage, icon: 'list' },
     { title: '手工检查输入', component: OrderMainPage, icon: 'list' },
     { title: '尺寸检查输入', component: ListPage, icon: 'list' },
     { title: 'Fitting检查输入', component: OrderMainPage, icon: 'list' },
@@ -47,26 +54,23 @@ export class TQSApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public menuCtrl: MenuController) {
     this.initializeApp();
 
-    // default menu
-    // this.pages = [
-    //   { title: '样板检查输入', component: OrderMainPage, icon: 'document' },
-    //   { title: '不合格样板查询', component: ListPage, icon: 'bookmark' }
-    // ];
-
-    //order main menu
-    // this.subPages = [
-    //   { title: '对款检查输入', component: ListPage, icon: '' },
-    //   { title: '手工检查输入', component: OrderMainPage, icon: '' },
-    //   { title: '尺寸检查输入', component: ListPage, icon: '' },
-    //   { title: 'Fitting检查输入', component: OrderMainPage, icon: '' },
-    //   { title: '烫折检查输入', component: ListPage, icon: '' },
-    //   { title: '外观检查输入', component: OrderMainPage, icon: '' }
-    // ];
-
-    //check user login
-    this.menuCtrl.enable(true, 'NoLoginDefault');
-    this.menuCtrl.enable(false, 'LoginDefault');
-    this.menuCtrl.enable(false, 'OrderInputDefault');
+    //check user data
+    const loginUserData = JSON.parse(localStorage.getItem('userAccountData'));
+    if (loginUserData) {
+      if (loginUserData.data) {
+        this.currentUserDetail = loginUserData.data;
+        console.log(this.currentUserDetail);
+      }
+    }
+    if (loginUserData) {
+      this.menuCtrl.enable(false, 'NoLoginDefault');
+      this.menuCtrl.enable(true, 'LoginDefault');
+      this.menuCtrl.enable(false, 'OrderInputDefault');
+    } else {
+      this.menuCtrl.enable(true, 'NoLoginDefault');
+      this.menuCtrl.enable(false, 'LoginDefault');
+      this.menuCtrl.enable(false, 'OrderInputDefault');
+    }
   }
 
   initializeApp() {
@@ -88,31 +92,20 @@ export class TQSApp {
     this.nav.setRoot(LoginPage);
   }
 
-  backupMainModule() {
-
-    this.nav.setRoot(HomePage);
-
-    //check user login
-    this.menuCtrl.enable(true, 'NoLoginDefault');
-    this.menuCtrl.enable(false, 'LoginDefault');
-    this.menuCtrl.enable(false, 'OrderInputDefault');
+  openChangePasswordPage() {
+    this.nav.setRoot(ChangePasswordPage);
   }
 
-  //menu color
-  // isActive(page: PageInterface) {
-  //   let childNav = this.nav.getActiveChildNavs()[0];
+  openUserAcountManagePage() {
+    this.nav.setRoot(UserAcountManagePage);
+  }
 
-  //   // Tabs are a special case because they have their own navigation
-  //   if (childNav) {
-  //     if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {
-  //       return 'primary';
-  //     }
-  //     return;
-  //   }
+  logout() {
+    localStorage.removeItem('userAccountData');
+    this.nav.setRoot(TQSApp);
+  }
 
-  //   if (this.nav.getActive() && this.nav.getActive().name === page.name) {
-  //     return 'primary';
-  //   }
-  //   return;
-  // }
+  backupMainModule() {
+    this.nav.setRoot(TQSApp);
+  }
 }

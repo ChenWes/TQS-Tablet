@@ -7,12 +7,38 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>signup</ion-title>
+    <ion-title>用户注册</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item>
+      <ion-label>部门</ion-label>
+      <ion-select [(ngModel)]='userData.department'>
+        <ion-option value="qa">QA</ion-option>
+        <ion-option value="it">IT</ion-option>        
+        <ion-option value="manage">Manage</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>工号</ion-label>
+      <ion-input type="text" [(ngModel)]='userData.code'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>用户名</ion-label>
+      <ion-input type="text" [(ngModel)]='userData.name'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>密码</ion-label>
+      <ion-input type="password" [(ngModel)]='userData.password'></ion-input>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button block ion-button color='light' (click)='signupFunction()'>
+      <ion-icon name='person-add'></ion-icon>
+      注册</button>
+  </div>
 </ion-content>
